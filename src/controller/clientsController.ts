@@ -3,7 +3,7 @@ import db from '../config/database'
 
 //GET
 async function listclients(req: Request, res: Response) {
-    db.connection.query('select * from clients', (err, results) => {
+    db.connection.query('select * from clients_ecommerce', (err, results) => {
             res.json({
                 success: true,
                 message: 'Listegem de clientes realizada com sucesso',
@@ -15,12 +15,12 @@ async function listclients(req: Request, res: Response) {
 
 //POST
 async function createclient(req: Request, res: Response) {
-    const querySql = ('INSERT INTO clients(DS_NAME, NM_CELLPHONE, DS_STATUS) VALUES(?,?,?)')
+    const querySql = ('INSERT INTO clients_ecommerce(DS_NAME, NM_CPF, FL_STATUS) VALUES(?,?,?)')
     
     const params = Array(
         req.body.DS_NAME,
-        req.body.NM_CELLPHONE,
-        req.body.DS_STATUS 
+        req.body.NM_CPF,
+        req.body.FL_STATUS 
     )
 
     db.connection.query(querySql, params, (err, results) => {
@@ -34,12 +34,12 @@ async function createclient(req: Request, res: Response) {
 
 //PUT
 async function editclient(req: Request, res: Response) {
-    const querySql = ('UPDATE clients SET DS_NAME = ?, NM_CELLPHONE = ?, DS_STATUS = ? where ID_CLIENT')
+    const querySql = ('UPDATE clients_ecommerce SET DS_NAME = ?, NM_CPF = ?, FL_STATUS = ? where ID_CLIENT = ?')
     
     const params = Array(
         req.body.DS_NAME,
-        req.body.NM_CELLPHONE,
-        req.body.DS_STATUS,
+        req.body.NM_CPF,
+        req.body.FL_STATUS,
         req.params.id
     )
 
@@ -54,7 +54,7 @@ async function editclient(req: Request, res: Response) {
 
 //DELETE
 async function deleteclient(req: Request, res: Response) {
-    const querySql = ('delete from clients where ID_CLIENT')
+    const querySql = ('delete from clients_ecommerce where ID_CLIENT = ?')
 
     db.connection.query(querySql, [req.params.id], (err, results) => {
         res.json({

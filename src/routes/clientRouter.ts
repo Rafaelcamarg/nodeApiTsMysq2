@@ -3,18 +3,18 @@ const express = require('express');
 import clientsController from "../controller/clientsController";
 
 
-const router = express.Router();
+const clientsRouter = express.Router();
 
 //Listar registros
-router.get('/users', clientsController.listclients);
+clientsRouter.get('/clients', clientsController.listclients);
 
 //Cadastrar usuario
-router.post('/users', clientsController.createclient);
+clientsRouter.post('/clients', clientsController.createclient);
 
 //Editar usuario
-router.put('/user/:id', clientsController.editclient);
+clientsRouter.put('/client/:id', clientsController.editclient);
 
 //Deletar usuario
-router.delete('/user/:id', clientsController.deleteclient);
+clientsRouter.delete('/client/:id', clientsController.deleteclient);
 
-export default router;
+export default clientsRouter;
